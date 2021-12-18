@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: conduit-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: conduit-frontend-service
+            port:
+              number: 4100
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: conduit-backend-service
+            port:
+              number: 3000

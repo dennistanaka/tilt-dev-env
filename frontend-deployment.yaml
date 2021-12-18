@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conduit-frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: conduit
+      tier: frontend
+  replicas: 2
+  # refers to the pod
+  template:
+    metadata:
+      labels:
+        app: conduit
+        tier: frontend
+    spec:
+      containers:
+        - name: conduit-frontend
+          image: conduit-react-frontend
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+          ports:
+            - containerPort: 4100
